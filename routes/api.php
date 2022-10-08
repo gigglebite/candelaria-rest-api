@@ -18,10 +18,15 @@ use App\Http\Controllers\Api\ProductController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/products/categories',[ProductController::class,'categories']);
-Route::get('/products/categories/{category_name}',[ProductController::class,'categoryProducts']);
-Route::get('/products/{product_id}',[ProductController::class,'show']);
-Route::apiResource('products', ProductController::class);
-Route::put('/products/{product_id}',[ProductController::class,'update']);
-Route::delete('/products/{product_id}',[ProductController::class,'destroy']);
-Route::get('/products/search/{keywords}', [ProductController::class,'search']);
+
+// Routes for the Product RESTful API
+
+Route::controller(ProductController::class)->group(function() {
+    Route::get('products', 'index');
+    Route::post('products/add', 'store');
+    Route::put('products/{product_id}', 'update');
+    Route::delete('products/{product_id}', 'destroy');
+    Route::get('products/categories', 'categories');
+    Route::get('products/categories/{category_name}', 'categoryProducts');
+    Route::get('products/{product_id}', 'show');
+});

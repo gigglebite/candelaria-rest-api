@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use DB;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -14,24 +13,24 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     // Method for retrieving all products
+
     public function index()
     {
+
+        try {
         $products = Product::all();
 
         return response()->json([
             'status' => true,
             'products' => $products
         ]);
+    } catch (Exception $e){
+        return response()->json([
+            'error' => 'Unable to retrieve all products'
+        ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -40,8 +39,12 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     // Method for storing or saving a product through request
+
     public function store(StoreProductRequest $request)
     {
+        try {
         $product = Product::create($request->all());
 
         return response()->json([
@@ -49,6 +52,11 @@ class ProductController extends Controller
             'message' => "Product created successfully!",
             'product' => $product
         ], 200);
+    } catch (Exception $e){
+        return response()->json([
+            'error' => 'Unable to save product'
+        ]);
+    }
     }
 
     /**
@@ -57,29 +65,22 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
+
+    // Method for retrieving a single product through request
     public function show(Request $request, $product_id)
     {
+        try {
         $product = Product::select('*')->where('id','=', $request->product_id)->get();
         return response()->json([
             'status' => true,
             'message' => "Product found successfully!",
             'product' => $product
         ], 200);
-
-        YourModelName::select('id', 'ref_code', 'name', 'price')
-             ->where('ref_code','=', $request->ref_code)
-             ->first();
+    } catch (Exception $e) {
+        return response()->json([
+            'error' => 'Unable to identify product'
+        ]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
     }
 
     /**
@@ -89,8 +90,11 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
+
+    // Method for updating a product through request
     public function update(Request $request, $product_id)
     {
+        try {
         $product = Product::find($product_id);
         $product->update($request->all());
 
@@ -99,10 +103,18 @@ class ProductController extends Controller
             'message' => "Product updated successfully!",
             'product' => $product
         ], 200);
+    } catch (Exception $e){
+        return response()->json([
+            'error' => 'Unable to update product'
+        ]);
     }
+    }
+
+    // Method for retrieving all categories
 
     public function categories()
     {
+        try {
         $categories = Product::select('category')->pluck('category');
 
         return response()->json([
@@ -110,10 +122,19 @@ class ProductController extends Controller
             'message' => "Categories found successfully!",
             'categories' => $categories
         ], 200);
+    } catch (Exception $e){
+        return response()->json([
+            'error' => 'Unable to retrieve categories'
+        ]);
     }
+    }
+
+    // Method for retrieving products from a category
+
 
     public function categoryProducts($category_name)
     {
+        try {
         $category_product = Product::select('*')->where('category', '=', $category_name)->get();
 
         return response()->json([
@@ -121,16 +142,29 @@ class ProductController extends Controller
             'message' => "Category products successfully!",
             'categories' => $category_product
         ], 200);
+    } catch (Exception $e){
+        return response()->json([
+            'error' => 'Unable to retrieve products by category'
+        ]);
     }
+    }
+
+    // Method for searching a product through keywords
 
     public function search($keywords)
     {
+        try {
         $product = Product::where('title','like','%'.$keywords.'%')->get();
         return response()->json([
             'status' => true,
             'message' => "Product/s found successfully!",
             'products' => $product
         ], 200);
+    } catch (Exception $e) {
+        return response()->json([
+            'error' => 'Unable to search product'
+        ]);
+    }
     }
 
     /**
@@ -139,8 +173,12 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
+
+     // Method for deleting a product through 
+     
     public function destroy(Request $request, $product_id)
     {
+        try {
         $product = Product::find($product_id);
         $product->delete();
 
@@ -148,5 +186,12 @@ class ProductController extends Controller
             'status' => true,
             'message' => "Product deleted successfully!",
         ], 200);
+    } catch (Exception $e){
+        return response()->json([
+            'error' => 'Unable to delete product'
+        ]);
     }
+    }
+
+
 }
