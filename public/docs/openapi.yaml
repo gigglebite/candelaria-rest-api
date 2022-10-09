@@ -1,0 +1,444 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000'
+paths:
+  /api/user:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/products:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  products:
+                    -
+                      id: 1
+                      title: Jacket
+                      description: 'Given Jacket Description'
+                      currency: PHP
+                      price: 1234.56
+                      brand: KuyaWill
+                      category: apparel
+                      image: 'https://netstorage-kami.akamaized.net/images/0fgjhs1shmj74jpi4g.jpg?&imwidth=1200'
+                      updated_at: '2022-09-24T02:40:29.000000Z'
+                      created_at: '2022-09-24T02:40:29.000000Z'
+                    -
+                      id: 2
+                      title: 'Percy Jackson'
+                      description: 'Fantasy Book'
+                      currency: PHP
+                      price: 1234.56
+                      brand: 'National Bookstore'
+                      category: book
+                      image: 'https://i.ibb.co/JmffwT9/Battle-of-Labyrinth-New-TP.webp'
+                      updated_at: '2022-09-24T02:40:29.000000Z'
+                      created_at: '2022-09-24T02:40:29.000000Z'
+                    -
+                      id: 3
+                      title: 'iPhone 14'
+                      description: 'Latest cool phone'
+                      currency: PHP
+                      price: 80000.75
+                      brand: Apple
+                      category: 'electronic device'
+                      image: 'https://photos5.appleinsider.com/gallery/product_pages/291-hero.jpg?=1663939036'
+                      updated_at: '2022-09-24T02:40:29.000000Z'
+                      created_at: '2022-09-24T02:40:29.000000Z'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  products:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        title: Jacket
+                        description: 'Given Jacket Description'
+                        currency: PHP
+                        price: 1234.56
+                        brand: KuyaWill
+                        category: apparel
+                        image: 'https://netstorage-kami.akamaized.net/images/0fgjhs1shmj74jpi4g.jpg?&imwidth=1200'
+                        updated_at: '2022-09-24T02:40:29.000000Z'
+                        created_at: '2022-09-24T02:40:29.000000Z'
+                      -
+                        id: 2
+                        title: 'Percy Jackson'
+                        description: 'Fantasy Book'
+                        currency: PHP
+                        price: 1234.56
+                        brand: 'National Bookstore'
+                        category: book
+                        image: 'https://i.ibb.co/JmffwT9/Battle-of-Labyrinth-New-TP.webp'
+                        updated_at: '2022-09-24T02:40:29.000000Z'
+                        created_at: '2022-09-24T02:40:29.000000Z'
+                      -
+                        id: 3
+                        title: 'iPhone 14'
+                        description: 'Latest cool phone'
+                        currency: PHP
+                        price: 80000.75
+                        brand: Apple
+                        category: 'electronic device'
+                        image: 'https://photos5.appleinsider.com/gallery/product_pages/291-hero.jpg?=1663939036'
+                        updated_at: '2022-09-24T02:40:29.000000Z'
+                        created_at: '2022-09-24T02:40:29.000000Z'
+                    items:
+                      type: object
+      tags:
+        - Endpoints
+      security: []
+  /api/products/add:
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: ''
+                  example: laudantium
+                description:
+                  type: string
+                  description: ''
+                  example: aperiam
+                currency:
+                  type: string
+                  description: ''
+                  example: in
+                price:
+                  type: string
+                  description: ''
+                  example: tempora
+                brand:
+                  type: string
+                  description: ''
+                  example: harum
+                category:
+                  type: string
+                  description: ''
+                  example: nobis
+                image:
+                  type: string
+                  description: ''
+                  example: molestias
+              required:
+                - title
+                - description
+                - currency
+                - price
+                - brand
+                - category
+                - image
+      security: []
+  '/api/products/{product_id}':
+    put:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  message: 'Product found successfully!'
+                  product:
+                    -
+                      id: 1
+                      title: Jacket
+                      description: 'Given Jacket Description'
+                      currency: PHP
+                      price: 1234.56
+                      brand: KuyaWill
+                      category: apparel
+                      image: 'https://netstorage-kami.akamaized.net/images/0fgjhs1shmj74jpi4g.jpg?&imwidth=1200'
+                      updated_at: '2022-09-24T02:40:29.000000Z'
+                      created_at: '2022-09-24T02:40:29.000000Z'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Product found successfully!'
+                  product:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        title: Jacket
+                        description: 'Given Jacket Description'
+                        currency: PHP
+                        price: 1234.56
+                        brand: KuyaWill
+                        category: apparel
+                        image: 'https://netstorage-kami.akamaized.net/images/0fgjhs1shmj74jpi4g.jpg?&imwidth=1200'
+                        updated_at: '2022-09-24T02:40:29.000000Z'
+                        created_at: '2022-09-24T02:40:29.000000Z'
+                    items:
+                      type: object
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: product_id
+        description: 'The ID of the product.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/products/categories:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  message: 'Categories found successfully!'
+                  categories:
+                    - apparel
+                    - book
+                    - 'electronic device'
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Categories found successfully!'
+                  categories:
+                    type: array
+                    example:
+                      - apparel
+                      - book
+                      - 'electronic device'
+                    items:
+                      type: string
+      tags:
+        - Endpoints
+      security: []
+  '/api/products/categories/{category_name}':
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  message: 'Category products successfully!'
+                  categories: []
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Category products successfully!'
+                  categories:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: category_name
+        description: ''
+        example: ut
+        required: true
+        schema:
+          type: string
+tags:
+  -
+    name: Endpoints
+    description: ''
